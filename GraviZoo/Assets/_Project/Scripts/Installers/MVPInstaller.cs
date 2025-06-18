@@ -9,7 +9,7 @@ namespace GraviZoo
         [SerializeField] private GameView _gameView;
         [SerializeField] private GameModel _gameModel;
 
-        //[SerializeField] private TileFactory _tileFactory;
+        [SerializeField] private TileFactory _tileFactory;
 
         public override void InstallBindings()
         {
@@ -17,7 +17,7 @@ namespace GraviZoo
             BindGameView();
             BindGameModel();
 
-            //BindTileFactory();
+            BindTileFactory();
         }
 
         private void BindGamePresenter()
@@ -43,13 +43,13 @@ namespace GraviZoo
                 .FromInstance(_gameModel)
                 .AsSingle();
         }
-        /*
+        
         private void BindTileFactory()
         {
             Container
                 .Bind<TileFactory>()
                 .FromInstance(_tileFactory)
                 .AsSingle();
-        }*/
+        }
     }
 }

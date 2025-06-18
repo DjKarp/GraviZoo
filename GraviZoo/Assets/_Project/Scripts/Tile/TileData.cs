@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GraviZoo
 {
-    public class TileData : ScriptableObject
+    public class TileData : MonoBehaviour
     {
         public enum Shape
         {

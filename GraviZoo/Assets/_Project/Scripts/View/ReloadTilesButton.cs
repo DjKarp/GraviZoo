@@ -9,7 +9,7 @@ namespace GraviZoo
     {
         private GamePresenter _gamePresenter;
         private List<SpriteRenderer> _spriteRenderers;
-        private BoxCollider2D _collider;
+        private CircleCollider2D _collider;
         private Sequence _tweenSequence;
 
         [Inject]
@@ -22,7 +22,7 @@ namespace GraviZoo
         {
             _spriteRenderers = new List<SpriteRenderer>();
             _spriteRenderers.AddRange(GetComponentsInChildren<SpriteRenderer>());
-            _collider = GetComponent<BoxCollider2D>();
+            _collider = GetComponent<CircleCollider2D>();
         }
         private void OnMouseDown()
         {
