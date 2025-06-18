@@ -77,7 +77,7 @@ namespace GraviZoo
                 if (_tilesContainer[i] == tile)
                 {
                     if (isDestroy)
-                        _tilesContainer[i].DestroyFromGamefield();
+                        _tilesContainer[i].OnDespawned();
                     else
                         _tilesContainer[i] = null;
 

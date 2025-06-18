@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04bdf7b4b6b92fe439373c11f0466f27, type: 3}
+  m_Name: GameplayData
+  m_EditorClassIdentifier: 
+  _maxCountTiles: 12
+  _matchCountTiles: 3
+  _timeSpawn: 0.2
+  _moveTileTime: 0.6
+  _numberTilesToUnfreeze: 3
+  TileEffectCount:
+  - TileEffect: 1
+    Count: 1
+  - TileEffect: 2
+    Count: 1
+  - TileEffect: 3
+    Count: 1
+  - TileEffect: 4
+    Count: 1
+  TilePrefab: {fileID: 3088144994076575730, guid: 97b3562e4e4e7f343a6e9fae0639a0cc, type: 3}

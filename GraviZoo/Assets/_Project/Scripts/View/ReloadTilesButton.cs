@@ -10,9 +10,7 @@ namespace GraviZoo
         private GamePresenter _gamePresenter;
         private List<SpriteRenderer> _spriteRenderers;
         private BoxCollider2D _collider;
-
-        // This animation option for the button is made in the animator, for example
-        private Animator _animator;
+        private Sequence _tweenSequence;
 
         [Inject]
         public void Construct(GamePresenter gamePresenter)
@@ -24,12 +22,16 @@ namespace GraviZoo
         {
             _spriteRenderers = new List<SpriteRenderer>();
             _spriteRenderers.AddRange(GetComponentsInChildren<SpriteRenderer>());
-            _animator = GetComponentInChildren<Animator>();
             _collider = GetComponent<BoxCollider2D>();
         }
         private void OnMouseDown()
         {
-            _animator.SetTrigger("isClick");
+            _tweenSequence = DOTween.Sequence();
+
+            _tweenSequence
+                .Append(transform.DOScale(0.8f, 0.2f))
+                .Append(transform.DOScale(1.0f, 0.2f))
+                .OnComplete(() => _gamePresenter.OnRestartClicked());
         }
 
         public void Hide()
@@ -46,10 +48,9 @@ namespace GraviZoo
                 spriteRenderer.DOFade(1.0f, 1.0f);
         }
 
-        // Call from Animations, for Example
-        public void ButtonClick()
+        private void OnDestroy()
         {
-            _gamePresenter.OnRestartClicked();
+            _tweenSequence.Kill(true);
         }
     }
 }

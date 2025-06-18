@@ -34,5 +34,7 @@ namespace GraviZoo
 
         [Tooltip("Список из названия эффекта особых тайлов - TileEffect и количества их на уровне. Т.е. сколько и каких специальных тайлов будет создаваться. ")]
         public List<TileEffectCount> TileEffectCount;
+
+        public Tile TilePrefab;
     }
 }
