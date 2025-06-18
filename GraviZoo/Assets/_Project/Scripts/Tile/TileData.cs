@@ -57,6 +57,6 @@ namespace GraviZoo
         public List<GameObject> ShapesColliders = new List<GameObject>();
 
         public Tile Tile;
-        //public List<TilePrefabByEffect> TilePrefabByEffects = new List<TilePrefabByEffect>();
+        public List<TilePrefabByEffect> TilePrefabByEffects = new List<TilePrefabByEffect>();
     }
 }

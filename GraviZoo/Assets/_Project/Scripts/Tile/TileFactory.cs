@@ -5,7 +5,7 @@ using Zenject;
 
 namespace GraviZoo
 {
-    public class TileFactory : PlaceholderFactory<TileModel, Tile> 
+    public class TileFactory : MonoBehaviour
     {
         private TileData _tileData;
         private GameConfig _gameplayData;
@@ -17,15 +17,14 @@ namespace GraviZoo
         List<TileModel> _tileModels = new List<TileModel>();
         private Dictionary<TileData.TileEffect, int> tileEffectCounts = new Dictionary<TileData.TileEffect, int>();
 
-        private TilePool _tilesPool;
+        private TilesPool _tilesPool;
 
         [Inject]
-        public void Construct(TileData tileData, GameConfig gameplayData, SignalBus signalBus, TilePool tilesPool)
+        public void Construct(TileData tileData, GameConfig gameplayData, SignalBus signalBus)
         {
             _tileData = tileData;
             _gameplayData = gameplayData;
             _signalBus = signalBus;
-            _tilesPool = tilesPool;
         }
 
         public void Init(List<Tile> tiles)
@@ -63,13 +62,14 @@ namespace GraviZoo
                     _tileModels[i].TileEffect = _tiles[i].TileModel.TileEffect;
                 }
             }
-            /*
+
             if (_tilesPool == null)
             {
+                _tilesPool = new TilesPool(transform, _tileData, _signalBus);
                 _tilesPool.Init(_tileModels);
             }
             else
-                _tilesPool.Refresh(_tileModels);*/
+                _tilesPool.Refresh(_tileModels);
         }
 
         public List<Tile> Create()
@@ -80,7 +80,7 @@ namespace GraviZoo
             foreach (TileModel model in _tileModels)
             {
                 _tile = null;
-                _tile = _tilesPool.Spawn(model, _tilesPool);
+                _tile = _tilesPool.Get(model.TileEffect);
                 _tiles.Add(_tile);
             }
 
@@ -90,7 +90,7 @@ namespace GraviZoo
 
         public void Release(Tile tile)
         {
-            _tilesPool.Despawn(tile);
+            _tilesPool.Release(tile);
         }
 
         private void CreateUniqueTileModels(int maxTilesCount)

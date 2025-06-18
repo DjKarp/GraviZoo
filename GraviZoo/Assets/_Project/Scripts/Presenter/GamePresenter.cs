@@ -12,43 +12,23 @@ namespace GraviZoo
         private GameView _gameView;
         private GameModel _gameModel;
 
-        private TileFactory _tileFactory;
-        private GameConfig _config;
-
         [Inject]
-        public void Construct(GameView gameView, GameModel gameModel, SignalBus signalBus, TileFactory tileFactory, GameConfig config)
+        public void Construct(GameView gameView, GameModel gameModel, SignalBus signalBus)
         {
             _gameView = gameView;
             _gameModel = gameModel;
             _signalBus = signalBus;
-            _tileFactory = tileFactory;
-            _config = config;
         }
 
         public void Init()
         {
-            _signalBus.Subscribe<ClickOnTileSignal>(OnTileClicked);
+            _gameView.DropTileOnScene(_gameModel.CreateTiles());
+
+            _signalBus.Subscribe<ClickOnTileSignal>(OnTileClick);
             _signalBus.Subscribe<TileOnTopPanelSignal>(TryMatchTilesOnPanel);
-
-            for (int i = 0; i < _config.MaxCountTiles; i++)
-            {
-                var model = CreateRandomTileModel();
-                var tile = _tileFactory.Create(model);
-                tile.transform.position = _gameView.transform.position;
-            }
         }
 
-        public void OnTileClicked(ClickOnTileSignal clickOnTileSignal)
-        {
-            if (_gameView.IsTopPanelHaveFreePlace())
-            {
-                clickOnTileSignal.Tile.SwitchOffRigidbodyAndCollider();
-                _gameView.GoTileOnPanel(clickOnTileSignal.Tile);
-                _gameModel.RemoveTileFromListActiveTiles(clickOnTileSignal.Tile);
-            }
-        }
-
-        public void OnRestartClicked()
+        public void ReloadTiles()
         {
             _gameView.StartStopGameplay(false);
             StartCoroutine(WaitBeforeDrop());
@@ -64,8 +44,18 @@ namespace GraviZoo
             _gameView.EraseGameField(_gameModel.ActiveTiles);
 
             yield return new WaitForSeconds(1.0f);
-            
+
             _gameView.DropTileOnScene(_gameModel.RefreshTiles());
+        }
+
+        private void OnTileClick(ClickOnTileSignal clickOnTileSignal)
+        {
+            if (_gameView.IsTopPanelHaveFreePlace())
+            {
+                clickOnTileSignal.Tile.SwitchOffRigidbodyAndCollider();
+                _gameView.GoTileOnPanel(clickOnTileSignal.Tile);
+                _gameModel.RemoveTileFromListActiveTiles(clickOnTileSignal.Tile);
+            }
         }
 
         private void TryMatchTilesOnPanel(TileOnTopPanelSignal tileOnTopPanelSignal)
@@ -77,7 +67,7 @@ namespace GraviZoo
                 foreach (Tile tile in triplesMatch)
                 {
                     _gameView.GoTileToFinish(tile);
-                }
+                }                
             }
             else if (_gameModel.IsAllClickedTileMoveOnPanel())
             {
@@ -89,7 +79,7 @@ namespace GraviZoo
         {
             if (_gameModel.IsWinner() == false && _gameModel.IsGameOver())
             {
-                _gameView.ShowLooseScreen();
+                _gameView.ShowScreenGameOver();
             }
         }
 
@@ -97,13 +87,8 @@ namespace GraviZoo
         {
             if (_gameModel.IsWinner())
             {
-                _gameView.ShowVictoryScreen();
+                _gameView.ShowScreenWinner();
             }
-        }
-
-        private TileModel CreateRandomTileModel()
-        {
-
         }
     }
 }

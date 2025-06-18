@@ -33,7 +33,7 @@ namespace GraviZoo
         {
             _signalBus.Subscribe<TileOnFinishSignal>(CheckConditions);
 
-            _gamePresenter.Init();
+            _tileFactory.Init(_activeTiles);
         }
 
         public bool IsGameOver()
@@ -119,7 +119,7 @@ namespace GraviZoo
 
         private void CheckConditions(TileOnFinishSignal tileOnFinishSignal)
         {
-            tileOnFinishSignal.Tile.OnDespawned();
+            tileOnFinishSignal.Tile.DestroyFromGamefield();
             _gamePresenter.CheckOnWin();
             CheckFrozedTiles();
         }

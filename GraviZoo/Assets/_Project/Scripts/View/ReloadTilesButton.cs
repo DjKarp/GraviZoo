@@ -31,7 +31,7 @@ namespace GraviZoo
             _tweenSequence
                 .Append(transform.DOScale(0.8f, 0.2f))
                 .Append(transform.DOScale(1.0f, 0.2f))
-                .OnComplete(() => _gamePresenter.OnRestartClicked());
+                .OnComplete(() => _gamePresenter.ReloadTiles());
         }
 
         public void Hide()

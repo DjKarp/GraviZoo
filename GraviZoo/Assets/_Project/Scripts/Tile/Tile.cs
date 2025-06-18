@@ -4,10 +4,9 @@ using Zenject;
 
 namespace GraviZoo
 {
-    public class Tile : MonoBehaviour, IPoolable<TileModel, IMemoryPool>
+    public class Tile : MonoBehaviour
     {
         private TileModel _tileModel;
-        private IMemoryPool _pool;
 
         public TileModel TileModel { get => _tileModel; set => _tileModel = value; }
 
@@ -82,25 +81,7 @@ namespace GraviZoo
                 });
         }
 
-        public void OnSpawned(TileModel model, IMemoryPool pool)
-        {
-            _tileModel = model;
-            _pool = pool;
-
-            InitFromModel();
-        }
-
-        private void InitFromModel()
-        {
-            // Применить визуал по _model
-        }
-
-        public void Despawn()
-        {
-            _pool.Despawn(this);
-        }
-
-        public void OnDespawned()
+        public void DestroyFromGamefield()
         {
             _tweenSequence = DOTween.Sequence();
 
