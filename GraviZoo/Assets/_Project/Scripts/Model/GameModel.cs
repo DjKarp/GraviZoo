@@ -119,7 +119,6 @@ namespace GraviZoo
 
         private void CheckConditions(TileOnFinishSignal tileOnFinishSignal)
         {
-            tileOnFinishSignal.Tile.DestroyFromGamefield();
             _gamePresenter.CheckOnWin();
             CheckFrozedTiles();
         }
@@ -136,13 +135,14 @@ namespace GraviZoo
             var random = new System.Random();
 
             _activeTiles.Clear();
+            _activeTiles = _tileFactory.Create().OrderBy(_ => random.Next()).ToList();    // Перемешаем второй раз
 
             return _activeTiles;
         }
 
         public List<Tile> RefreshTiles()
         {
-            _gamePresenter.Init();
+            _tileFactory.Init(_activeTiles);
 
             return CreateTiles();
         }

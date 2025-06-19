@@ -63,7 +63,7 @@ namespace GraviZoo
             _tweenSequence
                 .Append(_transform.DOMove(endPosition, duration).SetEase(Ease.OutSine))
                 .Insert(0, _transform.DOScale(_scaleOnTopPanel, duration / 5))
-                .Insert(1, _transform.DORotate(Vector3.zero, duration / 5))
+                .Insert(0, _transform.DORotate(Vector3.zero, duration))
                 .OnComplete(() => _signalBus.Fire(new TileOnTopPanelSignal(this, _topPanelSlotIndex)));
         }
 
@@ -78,11 +78,12 @@ namespace GraviZoo
                 .OnComplete(() =>
                 {
                     SetDefaultState();
+                    _signalBus.Fire(new TileOnFinishSignal(this));
                 });
         }
 
         public void DestroyFromGamefield()
-        {
+        {            
             _tweenSequence = DOTween.Sequence();
 
             _tweenSequence
@@ -115,14 +116,13 @@ namespace GraviZoo
 
         protected virtual void SetDefaultState()
         {
+            _transform.position = new Vector3(0.0f, 10.0f, 0.0f);
             _transform.localScale = Vector3.one;
             Rigidbody2D.gravityScale = _startRigidbodyGravityScale;
             _shapeSprite.sortingOrder = _startSortingOrderShapeSprite;
             _animalsSprite.sortingOrder = _startSortingOrderAnimalsSprite;
             DeattachTile();
             Destroy(ColliderGO);
-
-            _signalBus.Fire(new TileOnFinishSignal(this));
         }
 
         private void SwitchBoolIsGameplay(IsGameplayActiveSignal startStopGameplay)
@@ -144,7 +144,7 @@ namespace GraviZoo
                 Destroy(_fixedJoint);
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             Tween.Kill(true);
             _tweenSequence.Kill(true);

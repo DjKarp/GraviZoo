@@ -36,11 +36,6 @@ namespace GraviZoo
 
         private IEnumerator WaitBeforeDrop()
         {
-            while (!_gameModel.IsAllClickedTileMoveOnPanel())
-            {
-                yield return new WaitForEndOfFrame();
-            }
-
             _gameView.EraseGameField(_gameModel.ActiveTiles);
 
             yield return new WaitForSeconds(1.0f);

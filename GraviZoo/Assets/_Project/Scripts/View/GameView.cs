@@ -9,10 +9,8 @@ namespace GraviZoo
     public class GameView : MonoBehaviour
     {
         [SerializeField] private ActionBarModel _topPanel;
-        //[SerializeField] private Cloud _cloud;
-        /*[SerializeField] private ScreenWinner _screenWinner;
-        [SerializeField] private ScreenLooser _screenLooser;
-        [SerializeField] private ScreenMainMenu _screenMainMenu;*/
+        [SerializeField] private GameObject _winner;
+        [SerializeField] private GameObject _looser;
         private ReloadTilesButton _reloadButton;
 
         private GamePresenter _gamePresenter;
@@ -33,13 +31,10 @@ namespace GraviZoo
         private void Start()
         {
             _reloadButton.Hide();
-            /*
-            _screenWinner.gameObject.SetActive(true);
-            _screenLooser.gameObject.SetActive(true);
-            _screenMainMenu.gameObject.SetActive(true);
-            */
+
+            _winner.gameObject.SetActive(false);
+            _looser.gameObject.SetActive(false);
             _signalBus.Subscribe<TileOnTopPanelSignal>(AddedTileOnPanel);
-            _signalBus.Subscribe<PlayGameSignals>(HideMainMenu);
         }
 
         public void GoTileOnPanel(Tile tile)
@@ -51,25 +46,20 @@ namespace GraviZoo
 
         public void GoTileToFinish(Tile tile)
         {
-            tile.MoveToFinish(transform.position, _gameplayData.MoveTileTime / 2.0f);
+            tile.MoveToFinish(transform.position + new Vector3(0.0f, 5.0f, 0.0f), _gameplayData.MoveTileTime / 2.0f);
             _topPanel.RemoveTileFromPanel(tile);
         }
 
         public void ShowScreenGameOver()
         {
             StartStopGameplay(false);
-            //_screenLooser.Show();
+            _looser.SetActive(true);
         }
 
         public void ShowScreenWinner()
         {
             StartStopGameplay(false);
-            //_screenWinner.Show();
-        }
-
-        public void HideMainMenu(PlayGameSignals playGameSignals)
-        {
-            //_screenMainMenu.Hide();
+            _winner.SetActive(true);
         }
 
         public void DropTileOnScene(List<Tile> tiles)
