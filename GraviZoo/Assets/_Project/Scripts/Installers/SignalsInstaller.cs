@@ -37,6 +37,10 @@ namespace GraviZoo
             Container
                 .DeclareSignal<PlayGameSignals>()
                 .OptionalSubscriber();
+
+            Container
+                .DeclareSignal<RestartSceneSignal>()
+                .OptionalSubscriber();
         }
     }
 }

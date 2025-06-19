@@ -6,7 +6,7 @@ using Zenject;
 
 namespace GraviZoo
 {
-    public class GameView : MonoBehaviour
+    public class GameView : MonoBehaviour, IGameView, IMovedTile, ITileFieldService
     {
         [SerializeField] private ActionBarModel _topPanel;
         [SerializeField] private GameObject _winner;
@@ -24,7 +24,6 @@ namespace GraviZoo
             _gamePresenter = gamePresenter;
             _gameplayData = gameplayData;
             _reloadButton = reloadTilesButton;
-
             _signalBus = signalBus;
         }
 
@@ -35,6 +34,7 @@ namespace GraviZoo
             _winner.gameObject.SetActive(false);
             _looser.gameObject.SetActive(false);
             _signalBus.Subscribe<TileOnTopPanelSignal>(AddedTileOnPanel);
+            _signalBus.Subscribe<IsGameplayActiveSignal>(IsGameplayActive);
         }
 
         public void GoTileOnPanel(Tile tile)
@@ -50,16 +50,22 @@ namespace GraviZoo
             _topPanel.RemoveTileFromPanel(tile);
         }
 
-        public void ShowScreenGameOver()
+        public void ShowLooseScreen()
         {
-            StartStopGameplay(false);
             _looser.SetActive(true);
+            GameEnd();
         }
 
-        public void ShowScreenWinner()
+        public void ShowVictoryScreen()
         {
-            StartStopGameplay(false);
             _winner.SetActive(true);
+            GameEnd();
+        }
+
+        private void GameEnd()
+        {
+            IsGameplayActive(false);
+            _signalBus.Fire(new RestartSceneSignal());
         }
 
         public void DropTileOnScene(List<Tile> tiles)
@@ -77,7 +83,7 @@ namespace GraviZoo
                 yield return new WaitForSeconds(_gameplayData.TimeSpawn);
             }
 
-            StartStopGameplay(true);
+            IsGameplayActive(true);
         }
 
         public void ReloadTiles()
@@ -95,7 +101,7 @@ namespace GraviZoo
                     _topPanel.RemoveTileFromPanel(_topPanel.TilesContainer[i], true);
         }
 
-        public void AddedTileOnPanel(TileOnTopPanelSignal tileOnTopPanelSignal)
+        private void AddedTileOnPanel(TileOnTopPanelSignal tileOnTopPanelSignal)
         {
             _topPanel.AddedTileOnPanel(tileOnTopPanelSignal.Tile, tileOnTopPanelSignal.NumberPosition);
         }
@@ -105,7 +111,12 @@ namespace GraviZoo
             return _topPanel.IsHaveFreePlace;
         }
 
-        public void StartStopGameplay(bool isStart)
+        private void IsGameplayActive(IsGameplayActiveSignal isGameplayActiveSignal)
+        {
+            IsGameplayActive(isGameplayActiveSignal.IsActive, true);
+        }
+
+        private void IsGameplayActive(bool isStart, bool isFromSignal = false)
         {
             if (isStart)
             {
@@ -118,7 +129,8 @@ namespace GraviZoo
                 _reloadButton.Hide();
             }
 
-            _signalBus.Fire(new IsGameplayActiveSignal(isStart));
+            if (!isFromSignal)
+                _signalBus.Fire(new IsGameplayActiveSignal(isStart));
         }
     }
 }
