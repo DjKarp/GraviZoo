@@ -91,7 +91,11 @@ namespace GraviZoo
             Shapes2D.Shape shape = _tileData.ShapePrefab[shapeNumber];
 
             if (shapeNumber == 1)
-                shape.GetComponentInChildren<Shapes2D.Shape>().settings.fillColor = color;
+            {
+                List<Shapes2D.Shape> shapes = shape.gameObject.GetComponentsInChildren<Shapes2D.Shape>().ToList();
+                foreach(Shapes2D.Shape sh in shapes)
+                    sh.settings.fillColor = color;
+            }
             else
                 shape.settings.fillColor = color;
 

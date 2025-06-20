@@ -87,7 +87,7 @@ namespace GraviZoo
 
         private void CheckGameOver()
         {
-            if (_checkFinishGame.IsWinner() && _checkFinishGame.IsGameOver())
+            if (!_checkFinishGame.IsWinner() && _checkFinishGame.IsGameOver())
             {
                 _view.ShowLooseScreen();
             }

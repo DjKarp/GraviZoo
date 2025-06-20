@@ -117,15 +117,20 @@ namespace GraviZoo
             _animalsSprite.sortingOrder++;
         }
 
+        public void StopFalling()
+        {
+            Rigidbody2D.velocity = Vector2.zero;
+        }
+
         protected virtual void SetDefaultState()
         {
-            _transform.position = new Vector3(0.0f, 10.0f, 0.0f);
+            _transform.position = new Vector3(0.0f, -10.0f, 0.0f);
             _transform.localScale = Vector3.one;
             Rigidbody2D.gravityScale = _startRigidbodyGravityScale;
             SpriteRenderer.sortingOrder = _startSortingOrderShapeSprite;
             _animalsSprite.sortingOrder = _startSortingOrderAnimalsSprite;
             DeattachTile();
-            Collider2D.enabled = false;
+            Destroy(Shape.gameObject);
         }
 
         private void SwitchBoolIsGameplay(IsGameplayActiveSignal startStopGameplay)

@@ -9,8 +9,8 @@ namespace GraviZoo
     public class GameView : MonoBehaviour, IGameView, IMovedTile, ITileFieldService
     {
         [SerializeField] private ActionBarModel _topPanel;
-        [SerializeField] private GameObject _winner;
-        [SerializeField] private GameObject _looser;
+        [SerializeField] private ParticleSystem _winner;
+        [SerializeField] private ParticleSystem _looser;
         private ReloadTilesButton _reloadButton;
 
         private GamePresenter _gamePresenter;
@@ -27,8 +27,9 @@ namespace GraviZoo
             _signalBus = signalBus;
         }
 
-        private void Start()
+        private void Awake()
         {
+            _reloadButton.Init();
             _reloadButton.Hide();
 
             _winner.gameObject.SetActive(false);
@@ -52,13 +53,15 @@ namespace GraviZoo
 
         public void ShowLooseScreen()
         {
-            _looser.SetActive(true);
+            _looser.gameObject.SetActive(true);
+            _looser.Play();
             GameEnd();
         }
 
         public void ShowVictoryScreen()
         {
-            _winner.SetActive(true);
+            _winner.gameObject.SetActive(true);
+            _winner.Play();
             GameEnd();
         }
 
@@ -79,6 +82,7 @@ namespace GraviZoo
             {
                 tile.Transform.position = transform.position;
                 tile.gameObject.SetActive(true);
+                tile.StopFalling();
 
                 yield return new WaitForSeconds(_gameplayData.TimeSpawn);
             }

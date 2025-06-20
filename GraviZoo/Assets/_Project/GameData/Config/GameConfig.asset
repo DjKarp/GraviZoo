@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04bdf7b4b6b92fe439373c11f0466f27, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  _maxCountTiles: 24
+  _maxCountTiles: 51
   _matchCountTiles: 3
-  _timeSpawn: 0.2
+  _timeSpawn: 0.35
   _moveTileTime: 0.6
-  _numberTilesToUnfreeze: 3
+  _numberTilesToUnfreeze: 15
   TileEffectCount:
   - TileEffect: 1
-    Count: 1
+    Count: 2
   - TileEffect: 2
     Count: 1
   - TileEffect: 3
     Count: 1
   - TileEffect: 4
-    Count: 1
+    Count: 2
   TilePrefab: {fileID: 3088144994076575730, guid: 97b3562e4e4e7f343a6e9fae0639a0cc, type: 3}

@@ -18,7 +18,7 @@ namespace GraviZoo
             _gamePresenter = gamePresenter;
         }
 
-        private void Awake()
+        public void Init()
         {
             _spriteRenderers = new List<SpriteRenderer>();
             _spriteRenderers.AddRange(GetComponentsInChildren<SpriteRenderer>());
