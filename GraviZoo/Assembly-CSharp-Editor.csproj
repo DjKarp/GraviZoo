@@ -60,7 +60,9 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.23f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\JMO Assets\Cartoon FX Easy Editor\Editor\CFXEasyEditor.cs" />
+    <Compile Include="Assets\Shapes2D\Editor\CustomHandles.cs" />
+    <Compile Include="Assets\Shapes2D\Editor\MenuItems.cs" />
+    <Compile Include="Assets\Shapes2D\Editor\ShapeEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -1229,13 +1231,17 @@
       <Project>{13F6B941-0816-DB58-D8E3-F1D253CE168C}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
+    <ProjectReference Include="Assembly-CSharp-Editor-firstpass.csproj">
+      <Project>{34D2E71C-682F-9543-7601-EDD40809553D}</Project>
+      <Name>Assembly-CSharp-Editor-firstpass</Name>
+    </ProjectReference>
     <ProjectReference Include="Zenject.csproj">
       <Project>{23B56192-3BB0-BB86-F074-91602A0B3DDB}</Project>
       <Name>Zenject</Name>
     </ProjectReference>
-    <ProjectReference Include="CFXRRuntime.csproj">
-      <Project>{55AEBEDD-0BB9-C8FC-4A9D-47CF3EA83A64}</Project>
-      <Name>CFXRRuntime</Name>
+    <ProjectReference Include="CFXREditor.csproj">
+      <Project>{6D244C29-35BF-2B0F-83E3-9249D9BC1B31}</Project>
+      <Name>CFXREditor</Name>
     </ProjectReference>
     <ProjectReference Include="Zenject-PoolMonitor-Editor.csproj">
       <Project>{FC315C5D-554F-5E65-85DF-BB6CE913AE2D}</Project>
@@ -1245,6 +1251,10 @@
       <Project>{CA094FCB-94AE-07FF-FE72-705310CEF9A1}</Project>
       <Name>DOTween.Modules</Name>
     </ProjectReference>
+    <ProjectReference Include="CFXRRuntime.csproj">
+      <Project>{55AEBEDD-0BB9-C8FC-4A9D-47CF3EA83A64}</Project>
+      <Name>CFXRRuntime</Name>
+    </ProjectReference>
     <ProjectReference Include="Zenject-Editor.csproj">
       <Project>{6E3D2915-E9A8-4171-C04A-D5F98CE71D7C}</Project>
       <Name>Zenject-Editor</Name>
@@ -1252,10 +1262,6 @@
     <ProjectReference Include="Zenject-ReflectionBaking-Editor.csproj">
       <Project>{B4D7EF92-2E18-41CA-82AB-6D940D84A6DD}</Project>
       <Name>Zenject-ReflectionBaking-Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="CFXREditor.csproj">
-      <Project>{6D244C29-35BF-2B0F-83E3-9249D9BC1B31}</Project>
-      <Name>CFXREditor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -33,9 +33,8 @@ namespace GraviZoo
 
                 tile.Init(
                     model,
-                    GetShapeSprite((int)model.Shape, (int)model.Color),
+                    GetShape((int)model.Shape, model.Color),
                     _tileData.AnimalTexture[(int)model.AnimalType],
-                    _tileData.ShapesColliders[(int)model.Shape],
                     _signalBus);
             }
         }
@@ -50,9 +49,8 @@ namespace GraviZoo
 
                 tile.Init(
                     model,
-                    GetShapeSprite((int)model.Shape, (int)model.Color),
-                    _tileData.AnimalTexture[(int)model.AnimalType],
-                    _tileData.ShapesColliders[(int)model.Shape]);
+                    GetShape((int)model.Shape, model.Color),
+                    _tileData.AnimalTexture[(int)model.AnimalType]);
             }
 
             _tilesTake.Clear();
@@ -88,23 +86,16 @@ namespace GraviZoo
             return _tileData.Tile;
         }
 
-        private Sprite GetShapeSprite(int shapeNumber, int colorNumber)
+        private Shapes2D.Shape GetShape(int shapeNumber, Color color)
         {
-            switch (shapeNumber)
-            {
-                default:
-                case 0:
-                    return _tileData.ShapesCircle[colorNumber];
+            Shapes2D.Shape shape = _tileData.ShapePrefab[shapeNumber];
 
-                case 1:
-                    return _tileData.ShapesHexagon[colorNumber];
+            if (shapeNumber == 1)
+                shape.GetComponentInChildren<Shapes2D.Shape>().settings.fillColor = color;
+            else
+                shape.settings.fillColor = color;
 
-                case 2:
-                    return _tileData.ShapesPentagon[colorNumber];
-
-                case 3:
-                    return _tileData.ShapesRectangle[colorNumber];
-            }
+            return shape;
         }
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using Zenject;
+using Shapes2D;
 
 namespace GraviZoo
 {
@@ -16,10 +17,11 @@ namespace GraviZoo
         private int _topPanelSlotIndex;
         public int TopPanelSlotIndex { set => _topPanelSlotIndex = value; }
 
-        [SerializeField] private SpriteRenderer _shapeSprite;
+        [SerializeField] private Transform _shapeParent;
         [SerializeField] private SpriteRenderer _animalsSprite;
-        [SerializeField] private Transform _colliderPosition;
-        protected GameObject ColliderGO;
+        protected Shape Shape;
+        protected Collider2D Collider2D;
+        protected SpriteRenderer SpriteRenderer;
         protected Rigidbody2D Rigidbody2D;
         private FixedJoint2D _fixedJoint;
 
@@ -35,18 +37,19 @@ namespace GraviZoo
 
         private Vector3 _scaleOnTopPanel = new Vector3(0.9f, 0.9f, 0.9f);
 
-        public virtual void Init(TileModel tileModel, Sprite shape, Sprite animals, GameObject collider, SignalBus signalBus = null)
+        public virtual void Init(TileModel tileModel, Shape shape, Sprite animals, SignalBus signalBus = null)
         {
             _tileModel = tileModel;
-            _shapeSprite.sprite = shape;
-            _animalsSprite.sprite = animals;
-            ColliderGO = Instantiate(collider, _colliderPosition);
+            Shape = Instantiate(shape, _shapeParent);
+            Collider2D = Shape.gameObject.GetComponent<Collider2D>();
+            SpriteRenderer = Shape.gameObject.GetComponent<SpriteRenderer>();
+            _animalsSprite.sprite = animals;            
 
             _transform = gameObject.transform;
             Rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
 
             _startRigidbodyGravityScale = Rigidbody2D.gravityScale;
-            _startSortingOrderShapeSprite = _shapeSprite.sortingOrder;
+            _startSortingOrderShapeSprite = SpriteRenderer.sortingOrder;
             _startSortingOrderAnimalsSprite = _animalsSprite.sortingOrder;
 
             if (signalBus != null)
@@ -109,8 +112,8 @@ namespace GraviZoo
         public virtual void SwitchOffRigidbodyAndCollider()
         {
             Rigidbody2D.simulated = false;
-            Destroy(ColliderGO);
-            _shapeSprite.sortingOrder++;
+            Collider2D.enabled = false;
+            SpriteRenderer.sortingOrder++;
             _animalsSprite.sortingOrder++;
         }
 
@@ -119,10 +122,10 @@ namespace GraviZoo
             _transform.position = new Vector3(0.0f, 10.0f, 0.0f);
             _transform.localScale = Vector3.one;
             Rigidbody2D.gravityScale = _startRigidbodyGravityScale;
-            _shapeSprite.sortingOrder = _startSortingOrderShapeSprite;
+            SpriteRenderer.sortingOrder = _startSortingOrderShapeSprite;
             _animalsSprite.sortingOrder = _startSortingOrderAnimalsSprite;
             DeattachTile();
-            Destroy(ColliderGO);
+            Collider2D.enabled = false;
         }
 
         private void SwitchBoolIsGameplay(IsGameplayActiveSignal startStopGameplay)

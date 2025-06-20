@@ -6,33 +6,24 @@ namespace GraviZoo
     public class TileData : MonoBehaviour
     {
         public enum Shape
-        {
+        {            
             Circle,
+            Triangle,
             Hexagon,
             Pentagon,
             Rectangle
         }
-
-        public enum Color
-        {
-            Blue,
-            Gray,
-            Green,
-            Purple,
-            Red,
-            Turquoise,
-            Yellow
-        }
+        
         public enum AnimalType
         {
-            Bear,
-            Cow,
-            Cat,
+            Snake,
+            Tiger,
+            Mouse,
+            Elk,
             Dog,
-            Dragon,
-            Monkey,
-            Rabbit,
-            Rat
+            Bear,
+            Cat,
+            Bull
         }
 
         public enum TileEffect
@@ -44,17 +35,11 @@ namespace GraviZoo
             Frozen
         }
 
-        public List<Sprite> ShapesCircle = new List<Sprite>();
+        public List<Shapes2D.Shape> ShapePrefab = new List<Shapes2D.Shape>();
 
-        public List<Sprite> ShapesHexagon = new List<Sprite>();
-
-        public List<Sprite> ShapesPentagon = new List<Sprite>();
-
-        public List<Sprite> ShapesRectangle = new List<Sprite>();
+        public List<Color> Colors = new List<Color>();
 
         public List<Sprite> AnimalTexture = new List<Sprite>();
-
-        public List<GameObject> ShapesColliders = new List<GameObject>();
 
         public Tile Tile;
         public List<TilePrefabByEffect> TilePrefabByEffects = new List<TilePrefabByEffect>();

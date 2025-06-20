@@ -60,6 +60,9 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.23f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Plugins\Shapes2D\Editor\ShapeEditor.cs" />
+    <Compile Include="Assets\Plugins\Shapes2D\Editor\CustomHandles.cs" />
+    <Compile Include="Assets\Plugins\Shapes2D\Editor\MenuItems.cs" />
     <Compile Include="Assets\Plugins\JMO Assets\Cartoon FX Easy Editor\Editor\CFXEasyEditor.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1229,6 +1232,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{496ECC3A-35C2-209C-1617-08111B2B8618}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
     <ProjectReference Include="Zenject.csproj">
       <Project>{23B56192-3BB0-BB86-F074-91602A0B3DDB}</Project>
       <Name>Zenject</Name>

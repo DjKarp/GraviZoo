@@ -1,3 +1,4 @@
+using Shapes2D;
 using UnityEngine;
 using Zenject;
 
@@ -9,9 +10,9 @@ namespace GraviZoo
 
         private int _startSortingOrderEffectSprite;
 
-        public override void Init(TileModel tileModel, Sprite shape, Sprite animals, GameObject collider, SignalBus signalBus = null)
+        public override void Init(TileModel tileModel, Shape shape, Sprite animals, SignalBus signalBus = null)
         {
-            base.Init(tileModel, shape, animals, collider, signalBus);
+            base.Init(tileModel, shape, animals, signalBus);
 
             _startSortingOrderEffectSprite = EffectSpriteRenderer.sortingOrder;
         }

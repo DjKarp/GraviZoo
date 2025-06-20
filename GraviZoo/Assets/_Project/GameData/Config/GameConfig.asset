@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04bdf7b4b6b92fe439373c11f0466f27, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  _maxCountTiles: 12
+  _maxCountTiles: 24
   _matchCountTiles: 3
   _timeSpawn: 0.2
   _moveTileTime: 0.6

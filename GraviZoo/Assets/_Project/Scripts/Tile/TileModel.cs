@@ -5,11 +5,11 @@ namespace GraviZoo
     public class TileModel
     {
         public TileData.Shape Shape;
-        public TileData.Color Color;
+        public Color Color;
         public TileData.AnimalType AnimalType;
         public TileData.TileEffect TileEffect;
 
-        public TileModel(TileData.Shape shape, TileData.Color color, TileData.AnimalType animalType)
+        public TileModel(TileData.Shape shape, Color color, TileData.AnimalType animalType)
         {
             Shape = shape;
             Color = color;

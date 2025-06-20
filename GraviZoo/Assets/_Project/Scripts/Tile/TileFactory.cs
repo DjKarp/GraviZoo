@@ -105,7 +105,7 @@ namespace GraviZoo
                 {
                     _tileModel = new TileModel(
                         (TileData.Shape)random.Next(0, System.Enum.GetNames(typeof(TileData.Shape)).Length),
-                        (TileData.Color)random.Next(0, System.Enum.GetNames(typeof(TileData.Color)).Length),
+                        _tileData.Colors[random.Next(0, _tileData.Colors.Count)],
                         (TileData.AnimalType)random.Next(0, System.Enum.GetNames(typeof(TileData.AnimalType)).Length));
                 }
                 while (CheckModelOnUnique(_tileModel));

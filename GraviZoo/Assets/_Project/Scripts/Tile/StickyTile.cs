@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using DG.Tweening;
+using Shapes2D;
 
 namespace GraviZoo
 {
@@ -10,9 +11,9 @@ namespace GraviZoo
         private List<Tile> _stickTiles = new List<Tile>();
         private int _maxStickTiles = 2;
 
-        public override void Init(TileModel tileModel, Sprite shape, Sprite animals, GameObject collider, SignalBus signalBus)
+        public override void Init(TileModel tileModel, Shape shape, Sprite animals, SignalBus signalBus)
         {
-            base.Init(tileModel, shape, animals, collider, signalBus);
+            base.Init(tileModel, shape, animals, signalBus);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
