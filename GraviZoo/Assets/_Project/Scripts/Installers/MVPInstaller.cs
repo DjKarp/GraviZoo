@@ -6,15 +6,12 @@ namespace GraviZoo
     public class MVPInstaller : MonoInstaller
     {
         [SerializeField] private GamePresenter _gamePresenter;
-        [SerializeField] private GameView _gameView;
         [SerializeField] private GameModel _gameModel;
-
         [SerializeField] private TileFactory _tileFactory;
 
         public override void InstallBindings()
         {
             BindGamePresenter();
-            BindGameView();
             BindGameModel();
 
             BindTileFactory();
@@ -28,19 +25,21 @@ namespace GraviZoo
                 .AsSingle();
         }
 
-        private void BindGameView()
-        {
-            Container
-                .Bind<GameView>()
-                .FromInstance(_gameView)
-                .AsSingle();
-        }
-
         private void BindGameModel()
         {
             Container
-                .Bind<GameModel>()
-                .FromInstance(_gameModel)
+                .Bind<ICheckTiles>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+
+            Container
+                .Bind<IWorkedWhitTiles>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+
+            Container
+                .Bind<ICheckFinishGame>()
+                .FromComponentInHierarchy()
                 .AsSingle();
         }
         

@@ -6,7 +6,7 @@ using Zenject;
 
 namespace GraviZoo
 {
-    public class GameModel : MonoBehaviour
+    public class GameModel : MonoBehaviour, ICheckTiles, IWorkedWhitTiles, ICheckFinishGame
     {
         private GamePresenter _gamePresenter;
         private GameConfig _gameConfig;
@@ -16,7 +16,7 @@ namespace GraviZoo
         private TileFactory _tileFactory;
 
         private List<Tile> _activeTiles = new List<Tile>();
-        public List<Tile> ActiveTiles { get => _activeTiles; set => _activeTiles = value; }
+
         private Dictionary<string, List<Tile>> _topPanelsGroup = new Dictionary<string, List<Tile>>();
 
         [Inject]
@@ -34,6 +34,11 @@ namespace GraviZoo
             _signalBus.Subscribe<TileOnFinishSignal>(CheckConditions);
 
             _tileFactory.Init(_activeTiles);
+        }
+
+        public List<Tile> GetActiveTiles()
+        {
+            return _activeTiles;
         }
 
         public bool IsGameOver()

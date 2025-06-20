@@ -38,11 +38,6 @@ namespace GraviZoo
                 .Bind<ITileFieldService>()
                 .FromInstance(_gameView)
                 .AsSingle();
-            /*
-            Container
-                .BindInterfacesTo<GameView>()
-                .FromInstance(_gameView)
-                .AsSingle();*/
         }
     }
 }
