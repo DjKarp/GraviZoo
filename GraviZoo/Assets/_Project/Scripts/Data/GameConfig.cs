@@ -17,12 +17,12 @@ namespace GraviZoo
         public int MatchCountTiles { get => _matchCountTiles; }
 
 
-        [Tooltip("Интервал с которым спавняться тайлы из облака.")]
+        [Tooltip("Интервал с которым спавняться тайлы.")]
         [SerializeField] private float _timeSpawn = 0.5f;
         public float TimeSpawn { get => _timeSpawn; }
 
 
-        [Tooltip("Время для анимации полёта тайла из места, где по нему щёлкнули, до экшен бара. И это же время на анимацию полёта из бара в облако.")]
+        [Tooltip("Время для анимации полёта тайла из места, где по нему щёлкнули, до экшен бара.")]
         [SerializeField] private float _moveTileTime = 1.0f;
         public float MoveTileTime { get => _moveTileTime; }
 
@@ -32,7 +32,7 @@ namespace GraviZoo
         public float NumberTilesToUnfreeze { get => _numberTilesToUnfreeze; }
 
 
-        [Tooltip("Список из названия эффекта особых тайлов - TileEffect и количества их на уровне. Т.е. сколько и каких специальных тайлов будет создаваться. ")]
+        [Tooltip("Список из названия эффекта особых тайлов - TileEffect и количества их на уровне. Т.е. сколько и каких специальных тайлов будет создаваться.")]
         public List<TileEffectCount> TileEffectCount;
 
         public Tile TilePrefab;
