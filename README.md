@@ -13,11 +13,17 @@ MVP-архитектура
 
 ## ✨ Скриншоты
 <p align="center">
-<img src="https://redleggames.com/Games/GraviZoo/GraviZoo_Screen_01.png" width="200"/>
-<img src="https://redleggames.com/Games/GraviZoo/GraviZoo_Screen_02.png" width="200"/>
-<img src="https://redleggames.com/Games/GraviZoo/GraviZoo_Screen_03.png" width="200"/>
-<img src="https://redleggames.com/Games/GraviZoo/GraviZoo_Screen_04.png" width="200"/>
+<img src="https://redleggames.com/Games/GraviZoo/GraviZoo_Screen_05.png" width="200"/>
+<img src="https://redleggames.com/Games/GraviZoo/GraviZoo_Screen_06.png" width="200"/>
+<img src="https://redleggames.com/Games/GraviZoo/GraviZoo_Screen_07.png" width="200"/>
+<img src="https://redleggames.com/Games/GraviZoo/GraviZoo_Screen_08.png" width="200"/>
 </p>
+
+Видео доступно по этом ссылкам:
+
+https://rutube.ru/video/822075a87ce68238e64893cfd52d0158/
+
+https://vkvideo.ru/video-92186599_456239050
     
 ## 🎮 Геймплей
 Игровое поле заполняется случайными тайлами (Tile).
@@ -108,6 +114,8 @@ https://drive.google.com/file/d/1JDhBCWNzHYcS1IkfUxfhLWcgkudq22vV/view?usp=shari
 Склонируй проект:
 
 git clone https://github.com/DjKarp/GraviZoo.git
+
+скачать с Google Drive -> https://drive.google.com/file/d/1um9w4UCc71aC73yKdySV9e-_kZ7QJoqQ/view?usp=sharing
 
 Открыть в Unity 2022.3+ (URP)
 
