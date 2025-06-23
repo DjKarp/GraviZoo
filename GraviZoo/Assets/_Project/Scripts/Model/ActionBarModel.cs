@@ -36,7 +36,7 @@ namespace GraviZoo
             _tilesContainer = new Tile[7];
             _placesUse = new bool[7];
 
-            _hidePosition = _startPosition + new Vector3(10, 0, 0);
+            _hidePosition = _startPosition + new Vector3(20, 0, 0);
             _transform.position = _hidePosition;
         }
 
